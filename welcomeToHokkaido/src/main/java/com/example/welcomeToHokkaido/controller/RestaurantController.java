@@ -5,8 +5,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.welcomeToHokkaido.service.RestaurantService;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -22,5 +24,23 @@ public class RestaurantController {
         List<RestaurantDTO> restaurantList = restaurantService.getList();
         model.addAttribute("restaurantList", restaurantList);
         return "restaurant/restaurant";
+    }
+
+    @GetMapping("write")
+    public String write() {
+        return "restaurant/restaurantWrite";
+    }
+
+    @PostMapping("write")
+    public String write(RestaurantDTO restaurantDTO) {
+        Integer restaurantId = restaurantService.write(restaurantDTO);
+        return "redirect:/restaurant";
+    }
+
+    @GetMapping("read")
+    public String read(@RequestParam int restaurantId, Model model) {
+        RestaurantDTO restaurantDTO = restaurantService.read(restaurantId);
+        model.addAttribute("restaurantRead", restaurantDTO);
+        return "restaurant/restaurantRead";
     }
 }
