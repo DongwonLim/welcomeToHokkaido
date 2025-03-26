@@ -64,6 +64,7 @@ public class RestaurantService {
         RestaurantEntity entity = restaurantRepository.findById(restaurantId)
                 .orElseThrow(() -> new EntityNotFoundException("글이 없습니다."));
         RestaurantDTO restaurantDTO = RestaurantDTO.builder()
+                .restaurantId((entity.getRestaurantId()))
                 .restaurantTitle(entity.getRestaurantTitle())
                 .restaurantContent(entity.getRestaurantContent())
                 .restaurantRating(entity.getRestaurantRating())
@@ -73,5 +74,21 @@ public class RestaurantService {
                 .build();
 
         return restaurantDTO;
+    }
+
+    public void delete(int restaurantId) {
+        RestaurantEntity restaurantEntity = restaurantRepository.findById(restaurantId)
+                .orElseThrow(() -> new EntityNotFoundException("게시물이 없습니다."));
+        restaurantRepository.delete(restaurantEntity);
+    }
+
+    public void update(RestaurantDTO restaurantDTO) {
+        RestaurantEntity restaurantEntity = restaurantRepository.findById(restaurantDTO.getRestaurantId())
+                .orElseThrow(() -> new EntityNotFoundException("게시물을 찾을 수 없습니다."));
+        restaurantEntity.setRestaurantTitle(restaurantDTO.getRestaurantTitle());
+        restaurantEntity.setRestaurantContent(restaurantDTO.getRestaurantContent());
+        restaurantEntity.setRestaurantRating(restaurantDTO.getRestaurantRating());
+        //나중에 이미지도 추가
+        restaurantRepository.save(restaurantEntity);
     }
 }

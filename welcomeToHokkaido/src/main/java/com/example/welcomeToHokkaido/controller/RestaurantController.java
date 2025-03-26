@@ -4,11 +4,8 @@ import com.example.welcomeToHokkaido.domain.dto.RestaurantDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import com.example.welcomeToHokkaido.service.RestaurantService;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -37,10 +34,31 @@ public class RestaurantController {
         return "redirect:/restaurant";
     }
 
-    @GetMapping("read")
-    public String read(@RequestParam int restaurantId, Model model) {
+    @GetMapping("read/{restaurantId}")
+    public String read(@PathVariable("restaurantId") int restaurantId, Model model) {
         RestaurantDTO restaurantDTO = restaurantService.read(restaurantId);
         model.addAttribute("restaurantRead", restaurantDTO);
         return "restaurant/restaurantRead";
     }
+
+    @PostMapping("delete")
+    public String delete(@RequestParam("restaurantId") int restaurantId) {
+        restaurantService.delete(restaurantId);
+        return "redirect:/restaurant";
+    }
+
+    @GetMapping("update/{restaurantId}")
+    public String update(@PathVariable("restaurantId") int restaurantId, Model model) {
+        RestaurantDTO restaurantDTO = restaurantService.read(restaurantId);
+        model.addAttribute("restaurantRead", restaurantDTO);
+        return "restaurant/restaurantUpdate";
+    }
+
+    @PostMapping("update")
+    public String update(@ModelAttribute RestaurantDTO restaurantDTO) {
+        restaurantService.update(restaurantDTO);
+        return "redirect:/restaurant";
+    }
+
+
 }
