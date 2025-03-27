@@ -23,11 +23,11 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
         <div class="container px-5">
-            <a class="navbar-brand" href="../index.html"><span class="fw-bolder text-primary">Welcome To Hokkaido</span></a>
+            <a class="navbar-brand" href="/"><span class="fw-bolder text-primary">Welcome To Hokkaido</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
-                    <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="../resume.html">Resume</a></li>
                     <li class="nav-item"><a class="nav-link" href="/restaurant">Restaurant</a></li>
                     <li class="nav-item"><a class="nav-link" href="../contact.html">Contact</a></li>
@@ -36,7 +36,7 @@
         </div>
     </nav>
 <!--    enctype="multipart/form-data"> -> 이미지 업로드 기능 추가시 필요-->
-    <form th:action="@{/restaurant/write}" method="post" th:each="restaurant : ${restaurantRead}">
+    <form th:action="@{/restaurant/update}" method="post" th:each="restaurant : ${restaurantRead}">
         <table>
             <tr><td><h2>글쓰기</h2></td></tr>
             <tr><td class="header">Title</td></tr>
@@ -60,7 +60,8 @@
             <tr><td><textarea th:text="${restaurant.restaurantContent}" name="restaurantContent"></textarea></td></tr>
             <label for="imageUpload">Upload Image : </label>
             <input accept="image/*" id="imageUpload" name="imageUpload" type="file">
-            <form th:action="@{/restaurant/update/{id}(id=${restaurant.restaurantId})}" method="post">
+            <form>
+                <input type="hidden" name="restaurantId" th:value="${restaurant.restaurantId}">
                 <button class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" type="submit">수정</button>
             </form>
         </table>
