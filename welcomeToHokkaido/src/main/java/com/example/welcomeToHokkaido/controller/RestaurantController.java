@@ -1,12 +1,15 @@
 package com.example.welcomeToHokkaido.controller;
 
 import com.example.welcomeToHokkaido.domain.dto.RestaurantDTO;
+import com.example.welcomeToHokkaido.service.ImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.example.welcomeToHokkaido.service.RestaurantService;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RequestMapping("restaurant")
@@ -15,6 +18,7 @@ import java.util.List;
 public class RestaurantController {
 
     private final RestaurantService restaurantService;
+    private final ImageService imageService;
 
     @GetMapping
     public String list(Model model) {
@@ -29,8 +33,10 @@ public class RestaurantController {
     }
 
     @PostMapping("write")
-    public String write(RestaurantDTO restaurantDTO) {
+    public String write(RestaurantDTO restaurantDTO,
+                        @RequestParam("images")List<MultipartFile> images) throws IOException {
         Integer restaurantId = restaurantService.write(restaurantDTO);
+        imageService.uploadImage(images);
         return "redirect:/restaurant";
     }
 

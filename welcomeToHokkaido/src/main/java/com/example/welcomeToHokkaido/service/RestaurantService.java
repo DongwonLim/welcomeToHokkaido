@@ -1,11 +1,9 @@
 package com.example.welcomeToHokkaido.service;
 
 import com.example.welcomeToHokkaido.domain.dto.RestaurantDTO;
-import com.example.welcomeToHokkaido.domain.entity.MemberEntity;
 import com.example.welcomeToHokkaido.domain.entity.RestaurantEntity;
 import com.example.welcomeToHokkaido.repository.MemberRepository;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

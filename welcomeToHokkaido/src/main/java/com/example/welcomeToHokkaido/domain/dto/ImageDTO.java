@@ -7,14 +7,10 @@ import lombok.NoArgsConstructor;
 
 @Builder
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class MemberDto {
-
-    String memberId;
-    String memberPw;
-    String memberAddress;
-    String memberGender;
-    String memberPhone;
-    String memberEmail;
+@AllArgsConstructor
+public class ImageDTO {
+    int imageId;
+    String imagePath;
+    int restaurantId;
 }
