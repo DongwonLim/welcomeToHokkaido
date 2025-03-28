@@ -1,7 +1,9 @@
 package com.example.welcomeToHokkaido.service;
 
 import com.example.welcomeToHokkaido.domain.dto.RestaurantDTO;
+import com.example.welcomeToHokkaido.domain.entity.ImageEntity;
 import com.example.welcomeToHokkaido.domain.entity.RestaurantEntity;
+import com.example.welcomeToHokkaido.repository.ImageRepository;
 import com.example.welcomeToHokkaido.repository.MemberRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -11,6 +13,8 @@ import com.example.welcomeToHokkaido.repository.RestaurantRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -18,7 +22,7 @@ import java.util.List;
 public class RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
-    private final MemberRepository memberRepository;
+    private final ImageRepository imageRepository;
 
     public List<RestaurantDTO> getList() {
 
@@ -61,6 +65,7 @@ public class RestaurantService {
     public RestaurantDTO read(int restaurantId) {
         RestaurantEntity entity = restaurantRepository.findById(restaurantId)
                 .orElseThrow(() -> new EntityNotFoundException("글이 없습니다."));
+
         RestaurantDTO restaurantDTO = RestaurantDTO.builder()
                 .restaurantId((entity.getRestaurantId()))
                 .restaurantTitle(entity.getRestaurantTitle())

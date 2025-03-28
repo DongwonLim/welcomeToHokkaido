@@ -35,7 +35,7 @@
                 </div>
             </nav>
             <!-- Projects Section-->
-            <section class="py-5" th:each="restaurant : ${restaurantRead}">
+            <section class="py-5">
                 <div class="container px-5 mb-5">
                     <div class="text-center mb-5">
                         <h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">Restaurant</span></h1>
@@ -44,29 +44,30 @@
                         <a href="/restaurant/write">
                         <button class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder">글작성</button>
                         </a>
-                        <a th:href="@{/restaurant/update/{id}(id=${restaurant.restaurantId})}">
+                        <a th:href="@{/restaurant/update/{id}(id=${restaurantRead.restaurantId})}">
                         <button class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder">수정</button>
                         </a>
                         </form>
                         <form th:action="@{/restaurant/delete}" method="post">
-                            <input name="restaurantId" th:value="${restaurant.restaurantId}" type="hidden"/>
+                            <input name="restaurantId" th:value="${restaurantRead.restaurantId}" type="hidden"/>
                         <button class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" type="submit">삭제</button>
                         </form>
                     </div>
                     <div class="row gx-5 justify-content-center">
-                        </div>
-                        <div class="col-lg-11 col-xl-9 col-xxl-8">
+                    </div>
+                    <div class="col-lg-11 col-xl-9 col-xxl-8">
                             <!-- Project Card 1-->
-                            <div class="card overflow-hidden shadow rounded-4 border-0 mb-5">
-                                <div class="card-body p-0">
-                                    <div class="d-flex align-items-center">
-                                        <div class="p-5">
-                                            <div class="fw-bolder" th:text="${restaurant.restaurantTitle}">Title</div>
-                                            <div th:text="${restaurant.restaurantContent}">Content</div>
-                                            <div th:text="${restaurant.restaurantRating}">Rating</div>
-                                            <div th:text="${restaurant.restaurantDate}">Date</div>
-                                            <div th:text="${restaurant.memberId}">memberId</div>
-                                          <img class="img-fluid" src="https://dummyimage.com/300x400/343a40/6c757d" alt="..." />
+                        <div class="card overflow-hidden shadow rounded-4 border-0 mb-5">
+                            <div class="card-body p-0">
+                                <div class="d-flex align-items-center">
+                                    <div class="p-5">
+                                        <div class="fw-bolder" th:text="${restaurantRead.restaurantTitle}">Title</div>
+                                        <div th:text="${restaurantRead.restaurantContent}">Content</div>
+                                        <div th:text="${restaurantRead.restaurantRating}">Rating</div>
+                                        <div th:text="${restaurantRead.restaurantDate}">Date</div>
+                                        <div th:text="${restaurantRead.memberId}">memberId</div>
+                                        <div th:each="imagePath : ${restaurantRead.imagePath}">
+                                            <img class="img-fluid" th:src="@{${imagePath}}" alt="Restaurant Image" />
                                         </div>
                                     </div>
                                 </div>

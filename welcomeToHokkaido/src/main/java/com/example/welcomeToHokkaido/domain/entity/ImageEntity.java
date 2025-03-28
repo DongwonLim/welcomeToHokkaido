@@ -19,7 +19,7 @@ public class ImageEntity {
     @Column(name = "image_id", nullable = false)
     private Integer imageId;
 
-    @Column(name = "image_Path", nullable = false)
+    @Column(name = "image_Path")
     private String imagePath;
 
     @ManyToOne(fetch = FetchType.LAZY)
