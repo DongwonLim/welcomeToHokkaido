@@ -5,6 +5,7 @@ import com.example.welcomeToHokkaido.domain.entity.ImageEntity;
 import com.example.welcomeToHokkaido.domain.entity.RestaurantEntity;
 import com.example.welcomeToHokkaido.repository.ImageRepository;
 import com.example.welcomeToHokkaido.repository.MemberRepository;
+import jakarta.annotation.Resource;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,7 @@ public class RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
     private final ImageRepository imageRepository;
+    private final ImageService imageService;
 
     public List<RestaurantDTO> getList() {
 
@@ -66,6 +68,12 @@ public class RestaurantService {
         RestaurantEntity entity = restaurantRepository.findById(restaurantId)
                 .orElseThrow(() -> new EntityNotFoundException("글이 없습니다."));
 
+        List<String> imagePaths = entity.getImageEntities().stream()
+                .map(imageEntity -> "/images/" + imageEntity.getImagePath())
+                .collect(Collectors.toList());
+
+        System.out.println("이미지나오나요" + imagePaths);
+
         RestaurantDTO restaurantDTO = RestaurantDTO.builder()
                 .restaurantId((entity.getRestaurantId()))
                 .restaurantTitle(entity.getRestaurantTitle())
@@ -74,6 +82,7 @@ public class RestaurantService {
                 .restaurantImage(entity.getRestaurantImage())
                 .restaurantView(entity.getRestaurantView())
                 .restaurantDate(entity.getRestaurantDate())
+                .imagePath(imagePaths)
                 .build();
 
         return restaurantDTO;

@@ -36,7 +36,7 @@ public class RestaurantController {
     public String write(RestaurantDTO restaurantDTO,
                         @RequestParam("images")List<MultipartFile> images) throws IOException {
         Integer restaurantId = restaurantService.write(restaurantDTO);
-        imageService.uploadImage(images);
+        imageService.uploadImage(images, restaurantId);
         return "redirect:/restaurant";
     }
 
