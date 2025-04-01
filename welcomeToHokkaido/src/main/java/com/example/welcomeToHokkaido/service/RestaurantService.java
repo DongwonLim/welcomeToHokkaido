@@ -69,7 +69,7 @@ public class RestaurantService {
                 .orElseThrow(() -> new EntityNotFoundException("글이 없습니다."));
 
         List<String> imagePaths = entity.getImageEntities().stream()
-                .map(imageEntity -> "/images/" + imageEntity.getImagePath())
+                .map(imageEntity -> imageEntity.getImagePath().replace("C:", ""))
                 .collect(Collectors.toList());
 
         System.out.println("이미지나오나요" + imagePaths);

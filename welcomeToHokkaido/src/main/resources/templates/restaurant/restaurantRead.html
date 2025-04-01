@@ -67,7 +67,7 @@
                                         <div th:text="${restaurantRead.restaurantDate}">Date</div>
                                         <div th:text="${restaurantRead.memberId}">memberId</div>
                                         <div th:each="image : ${restaurantRead.imagePath}">
-                                            <img class="img-fluid" th:src="@{${image}}" alt="Restaurant Image" />
+                                            <img class="img-fluid" th:src="${image}" alt="Restaurant Image" />
                                         </div>
                                     </div>
                                 </div>
