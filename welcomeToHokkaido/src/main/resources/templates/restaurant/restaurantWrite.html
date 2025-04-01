@@ -15,8 +15,9 @@
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link th:href="@{/css/styles.css}" rel="stylesheet" />
-    <link th:href="@{/css/write.css}" rel="stylesheet" />
+    <link href="../../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />
+    <link href="../../static/css/write.css" th:href="@{/css/write.css}" rel="stylesheet" />
+    <script th:src="@{/js/write.js}"></script>
 </head>
 <body class="d-flex flex-column h-100 bg-light">
 <main class="flex-shrink-0">
@@ -59,7 +60,7 @@
             <tr><td><textarea placeholder="내용을 입력하세요" name="restaurantContent"></textarea></td></tr>
             <label for="imageUpload">Upload Image : </label>
             <input accept="image/*" id="imageUpload" name="images" type="file" multiple>
-            <tr><td><input type="submit" value="등록" onclick="alert('작성 완료!')"></td></tr>
+            <tr><td><button type="button" onclick="uploadFiles(); alert('작성 완료!')">등록</button></td></tr>
         </table>
     </form>
     <!-- Call to action section-->
@@ -89,7 +90,5 @@
 </footer>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Core theme JS-->
-<script th:src="@{/js/scripts.js}"></script>
 </body>
 </html>
