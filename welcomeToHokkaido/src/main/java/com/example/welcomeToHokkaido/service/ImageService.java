@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,6 +31,8 @@ public class ImageService {
         RestaurantEntity restaurantEntity = restaurantRepository.findById(restaurantId)
                 .orElseThrow(() -> new EntityNotFoundException("레스토랑을 찾을 수 없습니다."));
 
+        List<ImageEntity> imageEntities = new ArrayList<>();
+
         for (MultipartFile image : images) {
             //중복방지
             String fileName = UUID.randomUUID() + "-" + image.getOriginalFilename();
@@ -43,7 +46,8 @@ public class ImageService {
             imageEntity.setImagePath(filePath);
             imageEntity.setRestaurantId(restaurantEntity);
 
-            imageRepository.save(imageEntity);
+            imageEntities.add(imageEntity);
         }
+        imageRepository.saveAll(imageEntities);
     }
 }

@@ -36,7 +36,7 @@
             </div>
         </div>
     </nav>
-    <form th:action="@{/restaurant/write}" method="post" enctype="multipart/form-data">
+    <form th:action="@{/restaurant/write}" method="post" enctype="multipart/form-data" id="uploadForm">
         <table>
             <tr><td><h2>글쓰기</h2></td></tr>
             <tr><td class="header">Title</td></tr>
@@ -58,9 +58,11 @@
             </label><br>
             <tr><td class="header">Comment</td></tr>
             <tr><td><textarea placeholder="내용을 입력하세요" name="restaurantContent"></textarea></td></tr>
-            <label for="imageUpload">Upload Image : </label>
-            <input accept="image/*" id="imageUpload" name="images" type="file" multiple>
-            <tr><td><button type="button" onclick="uploadFiles(); alert('작성 완료!')">등록</button></td></tr>
+            <tr><td><label for="imageUpload">Upload Image : </label>
+            <input accept="image/*" id="imageUpload" name="images" type="file" multiple></td></tr>
+            <tr><td><div id="selectedImages"></div></td></tr>
+            <input type="hidden" id="removedImages" name="removedImages" value="">
+            <tr><td><input type="submit" value="등록" onclick="prepareSubmit(); alert('작성 완료!')"></td></tr>
         </table>
     </form>
     <!-- Call to action section-->

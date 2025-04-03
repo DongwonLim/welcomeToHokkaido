@@ -40,3 +40,30 @@ input[type="submit"]:active {
     padding-left: 10px;
     background-color: rgb(68, 136, 244);
 }
+
+      .selected-images {
+            margin-top: 10px;
+        }
+        .selected-image-item {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+        }
+        .selected-image-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border: 1px solid #ddd;
+        }
+        .remove-image {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: rgba(255, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
